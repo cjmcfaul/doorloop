@@ -16,5 +16,5 @@ def test_retrieve_property():
     property_id = response['data'][0].get('id')
     property_rep = dl.properties.retrieve(property_id)
     assert isinstance(property_rep, dict)
-    assert response['data'][0].get('address')
+    assert property_rep.get('address')
 

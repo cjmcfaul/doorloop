@@ -3,6 +3,11 @@ from .base import DoorLoopBase
 
 class DoorLoopTenant(DoorLoopBase):
     endpoint_base = '/tenants'
+    STATUSES = (
+        ('Past', 'PAST'),
+        ('Current', 'CURRENT'),
+        ('Future', 'FUTURE'),
+    )
 
     def retrieve(self, tenant_id, **kwargs):
         '''

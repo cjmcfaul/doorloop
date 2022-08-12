@@ -36,12 +36,10 @@ class DoorLoopLease(DoorLoopBase):
         response = self.connector.post(f'{self.endpoint_base}/move-out', data, **kwargs)
         return self.validator(response).validate()
 
-    def list_lease_tenants(self, *kwargs):
+    def list_lease_tenants(self, lease_id, **kwargs):
         '''
         List all Lease Tenants
         https://api.doorloop.com/reference/get-lease-tenants
         '''
-        response = self.connector.get(f'{self.endpoint_base}/lease-tenants', **kwargs)
+        response = self.connector.get(f'{self.endpoint_base}/{lease_id}/lease-tenants', **kwargs)
         return self.validator(response).validate()
-
-

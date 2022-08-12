@@ -26,6 +26,9 @@ from .files import DoorLoopFile
 
 
 class DoorLoop:
+    '''
+    https://api.doorloop.com/reference/introduction
+    '''
 
     def __init__(self, api_key=os.environ.get('DOORLOOP_API_KEY'), connector=None, validator=None):
         self.api_key = api_key
