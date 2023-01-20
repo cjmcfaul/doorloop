@@ -1,6 +1,7 @@
 import json
 import requests
 import logging
+from urllib.parse import urlencode
 
 logger = logging.getLogger('__name__')
 
@@ -26,6 +27,9 @@ class DoorLoopBase:
     def sorting(self, func, **kwargs):
         pass
 
+    def filter(self, func, **kwargs):
+        pass
+
 
 class DoorLoopConnector:
 
@@ -33,8 +37,14 @@ class DoorLoopConnector:
         self.api_key = api_key
         self.base_url = f"https://app.doorloop.com/api"
 
-    def get_url(self, endpoint):
-        return self.base_url + endpoint
+    def get_url(self, endpoint, query_params):
+        return f"{self.base_url}{endpoint}{self.get_url_query_params(query_params)}"
+
+    def get_url_query_params(self, params):
+        if isinstance(params, dict):
+            # url encode query parameters
+            return f"?{urlencode(params)}"
+        return ''
 
     def __getattr__(self, name):
         def f(endpoint, data=None, **kwargs):
@@ -65,10 +75,15 @@ class DoorLoopConnector:
                 # Add Content-Type header when required by DoorLoop API
                 kwargs['headers']['Content-Type'] = 'application/json'
 
+            query_params = None
+            if kwargs.get('query_params'):
+                query_params = kwargs['query_params']
+                del kwargs['query_params']
+
             if data:
                 # Convert data to json before sending
                 kwargs['data'] = json.dumps(data)
-            return DoorLoopConnector.api_call(upper_name, self.get_url(endpoint), **kwargs)
+            return DoorLoopConnector.api_call(upper_name, self.get_url(endpoint, query_params), **kwargs)
 
         return f
 

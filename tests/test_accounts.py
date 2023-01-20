@@ -24,12 +24,20 @@ class TestAccounts(DoorLoopTestCase):
         assert response['data'][0].get('name')
 
     def test_create_account(self):
-        pass
+        payload = {
+            "name": "Test 2",
+            "active": True,
+            "type": "ASSET_OTHER_ASSETS"
+        }
+        response = self.dl.accounts.create(payload)
+        assert isinstance(response, dict)
+        assert response.get('id')
 
     def test_retrieve_account(self):
         response = self.dl.accounts.retrieve(self.account_id)
         assert isinstance(response, dict)
         assert response.get('name')
+        self.dl.accounts.delete(response['id'])
 
     def test_update_account(self):
         payload = {

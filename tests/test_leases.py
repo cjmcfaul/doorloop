@@ -29,10 +29,18 @@ def test_move_out_tenant():
 
 
 def test_list_lease_tenants():
+    lease_resp = dl.leases.list_lease_tenants()
+    assert isinstance(lease_resp, dict)
+    assert lease_resp['data'][0].get('name')
+
+
+def test_list_lease_tenants_filter_lease():
     response = dl.leases.list()
     assert isinstance(response, dict)
     lease_id = response['data'][0].get('id')
     assert lease_id
-    lease_resp = dl.leases.list_lease_tenants(lease_id)
+    lease_resp = dl.leases.list_lease_tenants(query_params={
+        "filter_lease": lease_id,
+    })
     assert isinstance(lease_resp, dict)
-    assert response['data'][0].get('name')
+    assert lease_resp['data'][0].get('name')

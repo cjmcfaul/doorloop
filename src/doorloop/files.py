@@ -3,6 +3,17 @@ from .base import DoorLoopBase
 
 class DoorLoopFile(DoorLoopBase):
     endpoint_base = '/files'
+    RESOURCE_TYPES = [
+        'TENANT',
+        'OWNER',
+        'VENDOR',
+        'PROPERTY',
+        'UNIT',
+        'LEASE',
+        'LEASE_DRAFT',
+        'TASK',
+        'RENTAL_APPLICATION',
+    ]
 
     def list(self, **kwargs):
         '''

@@ -11,7 +11,7 @@ class TestTenants(DoorLoopTestCase):
         response = self.dl.tenants.create_prospect(payload)
         assert isinstance(response, dict)
         assert response.get('id')
-        self.tenant_id = response.get('id')
+        self.tenant_id = response['id']
 
     def tearDown(self):
         if self.tenant_id:

@@ -10,6 +10,26 @@ def test_list_units():
     assert response['data'][0].get('address')
 
 
+def test_list_units_filter_group():
+    # Filter by Portfolio
+    pass
+
+
+def test_list_units_filter_property():
+    # Filter by Property
+    pass
+
+
+def test_list_units_filter_owner():
+    # Filter by Owner
+    pass
+
+
+def test_list_units_filter_text():
+    # Filter by Unit Name
+    pass
+
+
 def test_retrieve_unit():
     response = dl.units.list()
     assert isinstance(response, dict)
