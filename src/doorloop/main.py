@@ -7,6 +7,7 @@ from .users import DoorLoopUser
 from .properties import DoorLoopProperty
 from .units import DoorLoopUnit
 from .leases import DoorLoopLease
+from .draft_leases import DoorLoopDraftLease
 from .tenants import DoorLoopTenant
 from .lease_payments import DoorLoopLeasePayment
 from .lease_returned_payments import DoorLoopLeaseReturnedPayments
@@ -54,6 +55,10 @@ class DoorLoop:
     @property
     def leases(self):
         return DoorLoopLease(self.connector, self.validator)
+
+    @property
+    def draft_leases(self):
+        return DoorLoopDraftLease(self.connector, self.validator)
 
     @property
     def tenants(self):
