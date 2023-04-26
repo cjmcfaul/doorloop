@@ -2,6 +2,7 @@
 requires = [
     "hatchling",
     "requests==2.0.0",
+    "requests-toolbelt==0.9.1"
 ]
 build-backend = "hatchling.build"
 

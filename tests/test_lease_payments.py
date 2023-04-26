@@ -31,6 +31,7 @@ class TestLeasePayments(DoorLoopTestCase):
             'date': date.today().isoformat(),
         }
         response = self.dl.lease_payments.create(payload)
+        print(response.data)
         self.new_lease_payment_id = response['id']
         return response
 

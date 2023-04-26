@@ -81,8 +81,11 @@ class DoorLoopConnector:
                 del kwargs['query_params']
 
             if data:
-                # Convert data to json before sending
-                kwargs['data'] = json.dumps(data)
+                if kwargs['headers'].get('Content-Type') == 'application/json':
+                    # Convert data to json before sending
+                    kwargs['data'] = json.dumps(data)
+                else:
+                    kwargs['data'] = data
             return DoorLoopConnector.api_call(upper_name, self.get_url(endpoint, query_params), **kwargs)
 
         return f
